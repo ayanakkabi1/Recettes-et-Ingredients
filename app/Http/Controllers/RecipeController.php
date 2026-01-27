@@ -6,9 +6,21 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 
 class RecipeController extends Controller {
-    public function index(){
+    public function index(Request $request){
         $recipes=Recipe::all();
-        return view('recipes.index',compact('recipes'));
+        $data=Recipe::query();
+        if($request->filled('category')){
+            $data->where('category_id',$request->category);
+        }
+        if($request->filled('search')){
+            $data->where('name','like','%'.$request->search.'%');
+            $data->orWhere('description','like','%'.$request->search.'%');
+            $data->orWhere('ingredients','like','%'.$request->search.'%');
+            $data->orWhere('steps','like','%'.$request->search.'%');
+        }
+        $recipes=$data->get();
+        $categories=Category::all();
+        return view('recipes.index',compact('recipes','categories'));
     }
     public function create(): View {
         $categories = Category::all();
@@ -50,6 +62,9 @@ class RecipeController extends Controller {
     }
     public function conteur(){
         $count=Recipe::count();
-        return view('home',compact('count'));
+        $categories = Category::all();
+        return view('home',compact('count','categories'));
     }
+    
+    
 }
