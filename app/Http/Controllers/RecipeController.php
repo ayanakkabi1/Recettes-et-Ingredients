@@ -24,4 +24,21 @@ class RecipeController extends Controller {
         Recipe::create($validatedData);
         return redirect()->route('recipes.index')->with('success', 'Recipe created successfully.');
     }
+    public function edit($id){
+        $recipe=Recipe::findOrFail($id);
+        return view('recipes.edit', compact('recipe'));
+    }
+    PUBLIC FUNCTION Update(Request$request,$id){
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'ingredients' => 'required|string',
+            'steps' => 'required|string',
+            'image' => 'required|string|max:255',
+            'category' => 'required|string|max:255',
+        ]);
+        $recipe=Recipe::findOrFail($id);
+        $recipe->update($validatedData);
+        return redirect()->route('recipes.index')->with('success', 'Recipe updated successfully.');
+    }
 }
