@@ -21,7 +21,7 @@ class RecipeController extends Controller {
             'ingredients' => 'required|string',
             'steps' => 'required|string',
             'image' => 'required|string|max:255',
-            'category' => 'required|string|max:255',
+            'category_id' => 'required|integer|exists:categories,id',
         ]);
         Recipe::create($validatedData);
         return redirect()->route('recipes.index')->with('success', 'Recipe created successfully.');
