@@ -21,5 +21,14 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+        $categories = [
+        ['name' => 'Entrées'],
+        ['name' => 'Plats'],
+        ['name' => 'Desserts'],
+        ['name' => 'Boissons'],
+        ];
+        foreach ($categories as $cat) {
+        \App\Models\Category::create($cat);
+        }
     }
 }
