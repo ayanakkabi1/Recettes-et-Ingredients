@@ -3,9 +3,9 @@
 @section('content')
 <div class="min-h-screen bg-gradient-to-br from-pink-50 to-rose-50 py-8 px-4">
     <div class="max-w-2xl mx-auto"> {{-- Réduit de max-w-3xl à 2xl --}}
-        
+
         <div class="bg-white/90 backdrop-blur-md rounded-[2.5rem] shadow-xl shadow-pink-200/40 overflow-hidden border border-white transition-all duration-500 hover:shadow-2xl">
-            
+
             {{-- Header plus compact --}}
             <div class="bg-gradient-to-r from-pink-500 to-rose-400 p-6 text-center">
                 <div class="inline-block bg-white/20 p-2 rounded-2xl backdrop-blur-md mb-2">
@@ -16,7 +16,7 @@
 
             {{-- Formulaire avec espacement réduit (space-y-5) --}}
             <form action="{{ route('recipes.store') }}" method="POST" class="p-6 md:p-10 space-y-5">
-                @csrf 
+                @csrf
 
                 {{-- Nom --}}
                 <div class="group">
@@ -29,13 +29,20 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                     {{-- Catégorie --}}
                     <div>
-                        <label class="block text-[10px] font-black text-pink-400 uppercase tracking-widest mb-1 ml-2">Catégorie</label>
-                        <select name="category" required
-                            class="w-full px-5 py-3 bg-pink-50/30 border-2 border-transparent rounded-2xl focus:border-pink-300 focus:bg-white outline-none text-sm appearance-none cursor-pointer">
-                            <option value="Entrée">🥗 Entrée</option>
-                            <option value="Plat">🥘 Plat</option>
-                            <option value="Dessert">🍰 Dessert</option>
-                            <option value="Marocaine">🇲🇦 Marocaine</option>
+                        <label for="category_id" class="block text-[10px] font-black text-pink-400 uppercase tracking-widest mb-2">
+                            Choisir un univers
+                        </label>
+
+                        <select name="category_id" id="category_id"
+                            class="w-full p-4 bg-white border-2 border-pink-50 rounded-2xl focus:border-pink-500 outline-none transition-all appearance-none">
+
+                            <option value="" disabled selected>-- Sélectionnez une catégorie --</option>
+
+                            @foreach($categories as $category)
+                            <option value="{{ $category->id }}">
+                                {{ $category->emoji }} {{ $category->name }}
+                            </option>
+                            @endforeach
                         </select>
                     </div>
 
@@ -71,7 +78,7 @@
 
                 {{-- Bouton moins haut --}}
                 <div class="pt-4">
-                    <button type="submit" 
+                    <button type="submit"
                         class="w-full py-4 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold rounded-2xl shadow-lg shadow-pink-100 transform transition hover:scale-[1.02] active:scale-95 uppercase text-xs tracking-[0.2em] flex items-center justify-center space-x-2">
                         <span>Publier</span>
                         <span>💖</span>
