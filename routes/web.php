@@ -7,6 +7,8 @@ use App\Http\Controllers\RecipeController;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/home',[RecipeController::class, 'conteur'])->name('home');
+
 
 Route::get('/recipes', [RecipeController::class, 'index'])->name('recipes.index');
 Route::get('/recipes/create', [RecipeController::class, 'create'])->name('recipes.create');
