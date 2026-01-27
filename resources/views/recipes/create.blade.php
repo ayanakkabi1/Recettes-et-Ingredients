@@ -13,7 +13,16 @@
                 </div>
                 <h2 class="text-2xl font-black text-white tracking-tight">Nouvelle Recette</h2>
             </div>
-
+            @if ($errors->any())
+            <div class="mb-4 p-4 bg-red-50 border-l-4 border-red-400 text-red-700 rounded-r-2xl text-xs">
+                <p class="font-bold uppercase mb-1">Oups ! Il y a des erreurs :</p>
+                <ul class="list-disc ml-4">
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
             {{-- Formulaire avec espacement réduit (space-y-5) --}}
             <form action="{{ route('recipes.store') }}" method="POST" class="p-6 md:p-10 space-y-5">
                 @csrf
