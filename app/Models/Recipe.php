@@ -13,6 +13,10 @@ class Recipe extends Model
         'ingredients',
         'steps',
         'image',
-        'category'
+        'category_id'
     ];
+    public function category()
+{
+    return $this->belongsTo(Category::class);
+}
 }
