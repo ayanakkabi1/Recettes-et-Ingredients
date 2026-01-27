@@ -46,4 +46,8 @@ class RecipeController extends Controller {
         $recipe->delete();
         return redirect()->route('recipes.index')->with('success','Recipe deleted successfully.');
     }
+    public function conteur(){
+        $count=Recipe::count();
+        return view('home',compact('count'));
+    }
 }
