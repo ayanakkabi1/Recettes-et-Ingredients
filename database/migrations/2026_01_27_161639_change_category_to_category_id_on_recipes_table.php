@@ -12,7 +12,6 @@ return new class extends Migration
     public function up(): void
 {
     Schema::table('recipes', function (Blueprint $table) {
-        // 1. Supprimer l'ancienne colonne 'category' (le texte)
         $table->dropColumn('category');
         $table->foreignId('category_id')->nullable()->constrained()->onDelete('cascade');
     });

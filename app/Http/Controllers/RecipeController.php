@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use App\Models\Recipe;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class RecipeController extends Controller {
     public function index(){
@@ -10,7 +11,8 @@ class RecipeController extends Controller {
         return view('recipes.index',compact('recipes'));
     }
     public function create(): View {
-        return view('recipes.create');
+        $categories = Category::all();
+        return view('recipes.create',compact('categories'));
     }
     public function store(Request $request) {
         $validatedData = $request->validate([
