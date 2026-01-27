@@ -105,3 +105,29 @@ Voici le parcours d'une requête type :
     Grâce à Composer et au système d'Injection de Dépendances, Laravel gère les outils externes de manière très ordonnée.
 
     Au lieu d'inclure manuellement des dizaines de fichiers require en haut de vos scripts, Laravel "injecte" automatiquement les outils dont vous avez besoin là où vous en avez besoin.
+### Que fait la commande php artisan make:model et pourquoi peut-elle inclure --migration ?
+    1. À quoi sert make:model ?
+        En suivant l'architecture MVC (Modèle-Vue-Contrôleur), le modèle est la couche qui gère la logique de données. Au lieu d'écrire du SQL complexe, vous utilisez les méthodes PHP du modèle pour interagir avec vos tables.
+
+        Par exemple, si vous lancez : php artisan make:model Product
+
+        Laravel créera un fichier app/Models/Product.php. Grâce à ce modèle, vous pourrez faire des choses comme :
+
+        Product::all() pour récupérer tous les produits.
+
+        Product::where('price', '>', 100)->get() pour filtrer les données.
+
+    2. Pourquoi inclure l'option --migration (ou -m) ?
+        Dans Laravel, un modèle ne suffit pas : il faut aussi que la table correspondante existe physiquement dans votre base de données. C'est là qu'interviennent les migrations.
+
+         L'option --migration demande à Laravel de créer simultanément :
+         Le fichier de Modèle (app/Models/Product.php).
+
+         Le fichier de Migration (database/migrations/xxxx_xx_xx_create_products_table.php).
+
+         Les avantages de ce "pack" :
+               Gain de temps : Vous créez la structure de données et l'objet PHP en une seule commande.
+
+               Synchronisation : Laravel nomme automatiquement la table au pluriel (products) pour correspondre au modèle au singulier (Product), respectant ainsi les conventions de nommage du framework.
+
+          Workflow propre : Vous définissez vos colonnes (id, nom, prix) directement dans le fichier de migration généré avant de les envoyer en base avec php artisan migrate.
