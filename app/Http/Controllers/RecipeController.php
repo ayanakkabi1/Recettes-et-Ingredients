@@ -41,4 +41,9 @@ class RecipeController extends Controller {
         $recipe->update($validatedData);
         return redirect()->route('recipes.index')->with('success', 'Recipe updated successfully.');
     }
+    public function destroy($id){
+        $recipe=Recipe::findOrfail($id);
+        $recipe->delete();
+        return redirect()->route('recipes.index')->with('success','Recipe deleted successfully.');
+    }
 }
