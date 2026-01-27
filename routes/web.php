@@ -16,3 +16,4 @@ Route::post('/recipes', [RecipeController::class, 'store'])->name('recipes.store
 Route::get('/recipes/{id}/edit', [RecipeController::class, 'edit'])->name('recipes.edit');
 Route::put('/recipes/{id}', [RecipeController::class, 'update'])->name('recipes.update');
 Route::delete('/recipes/{id}', [RecipeController::class, 'destroy'])->name('recipes.destroy');
+Route::resource('categories', \App\Http\Controllers\CategoryController::class); 
