@@ -10,3 +10,5 @@ Route::get('/home', function () {
     return view('home');
 });
 Route::get('/recipes', [RecipeController::class, 'index']);
+Route::post('/recipes', [RecipeController::class, 'store'])->name('recipes.store');
+Route::get('/recipes', [RecipeController::class, 'create'])->name('recipes.index');
