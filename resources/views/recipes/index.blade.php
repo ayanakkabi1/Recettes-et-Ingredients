@@ -13,7 +13,41 @@
             + Ajouter une recette
         </a>
     </div>
+    <div class="max-w-4xl mx-auto px-6 mb-12">
+    <form action="{{ route('recipes.index') }}" method="GET" class="flex flex-col md:flex-row gap-4">
+        
+        {{-- Barre de recherche --}}
+        <div class="relative flex-grow">
+            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-pink-400">🔍</span>
+            <input type="text" name="search" value="{{ request('search') }}"
+                placeholder="Chercher une recette..." 
+                class="w-full pl-12 pr-4 py-4 bg-white border-2 border-pink-50 rounded-2xl shadow-sm focus:border-pink-300 outline-none transition-all">
+        </div>
 
+        {{-- Select de catégorie --}}
+        <select name="category" onchange="this.form.submit()" 
+            class="px-6 py-4 bg-white border-2 border-pink-50 rounded-2xl shadow-sm outline-none focus:border-pink-300 text-gray-500 cursor-pointer">
+            <option value="">Toutes les catégories</option>
+            @foreach($categories as $cat)
+                <option value="{{ $cat->id }}" {{ request('category') == $cat->id ? 'selected' : '' }}>
+                    {{ $cat->name }}
+                </option>
+            @endforeach
+        </select>
+
+        
+        <button type="submit" class="bg-pink-500 text-white px-8 py-4 rounded-2xl font-black uppercase text-[10px] tracking-widest hover:bg-pink-600 transition-all shadow-lg shadow-pink-100">
+            Filtrer
+        </button>
+    </form>
+</div> 
+     @if($recipes->isEmpty())
+    <div class="text-center py-20">
+        <span class="text-6xl block mb-4">🥥</span>
+        <h3 class="text-xl font-bold text-gray-400">Oups ! Aucune recette trouvée pour "{{ request('search') }}"</h3>
+        <a href="{{ route('recipes.index') }}" class="text-pink-500 underline mt-2 inline-block">Réinitialiser les filtres</a>
+    </div>
+@else
     {{-- Grille --}}
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
         @forelse($recipes as $recipe)
@@ -92,5 +126,6 @@
             </div>
         @endforelse
     </div>
+    @endif
 </div>
 @endsection
