@@ -1,38 +1,6 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pink Kitchen - Mon Livre Ouvert</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-    </style>
-</head>
-<body class="bg-[#FFF5F7] min-h-screen flex flex-col">
-
-    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-pink-100">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <span class="text-2xl">🌸</span>
-                <h1 class="text-xl font-black text-gray-800 tracking-tighter uppercase">
-                    Pink<span class="text-pink-500">Kitchen</span>
-                </h1>
-            </div>
-            
-            <nav class="hidden md:flex items-center space-x-8 text-[11px] font-black uppercase tracking-widest text-gray-500">
-                <a href="/" class="hover:text-pink-500 transition-colors">Accueil</a>
-                <a href="/recipes" class="text-pink-500 border-b-2 border-pink-500 pb-1">Mes Recettes</a>
-                <a href="/contact" class="hover:text-pink-500 transition-colors">Contact</a>
-            </nav>
-
-            <a href="{{ route('recipes.create') }}" class="px-5 py-2.5 bg-pink-500 text-white text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg shadow-pink-200 hover:scale-105 transition-all">
-                + Nouvelle Recette
-            </a>
-        </div>
-    </header>
-
+@extends('layouts.app')
+    @section('content')
+    <body class="bg-[#FFF5F7] min-h-screen flex flex-col">
     <main class="flex-grow flex items-center justify-center py-20 px-6">
         <div class="text-center space-y-6">
             <div class="inline-block px-4 py-1.5 bg-pink-100 text-pink-500 rounded-full text-[10px] font-black uppercase tracking-[0.3em] mb-4">
@@ -75,12 +43,4 @@
             </div>
         </div>
     </main>
-     
-    <footer class="py-10 text-center border-t border-pink-50 bg-white">
-        <p class="text-[10px] font-black text-gray-300 uppercase tracking-[0.5em]">
-            &copy; 2026 Pink Kitchen 
-        </p>
-    </footer>
-
-</body>
-</html>
+    @endsection
