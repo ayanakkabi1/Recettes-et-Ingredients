@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RecipeController;
+use App\Http\Controllers\AuthController;
 
 // Accueil
 Route::get('/', function () {
@@ -17,3 +18,6 @@ Route::get('/recipes/{id}/edit', [RecipeController::class, 'edit'])->name('recip
 Route::put('/recipes/{id}', [RecipeController::class, 'update'])->name('recipes.update');
 Route::delete('/recipes/{id}', [RecipeController::class, 'destroy'])->name('recipes.destroy');
 Route::get('/recipes', [App\Http\Controllers\RecipeController::class, 'index'])->name('recipes.index');
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
