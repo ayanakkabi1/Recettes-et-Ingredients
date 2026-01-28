@@ -17,7 +17,7 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('recipes.index');
+            return redirect()->intended(route('recipes.index'));
         }
 
         return back()->withErrors([
@@ -32,6 +32,31 @@ class AuthController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/home');
     }
+    
+    public function registerUser(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $user = \App\Models\User::create([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'password' => bcrypt($validatedData['password']),
+        ]);
+
+        Auth::login($user);
+
+        return redirect()->intended(route('recipes.index'));
+    }
+    public function showRegister()
+    {
+        return view('auth.register');
+    }
+    
 }
+
