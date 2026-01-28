@@ -23,7 +23,7 @@
                 </ul>
             </div>
             @endif
-            {{-- Formulaire avec espacement réduit (space-y-5) --}}
+            @auth
             <form action="{{ route('recipes.store') }}" method="POST" class="p-6 md:p-10 space-y-5">
                 @csrf
 
@@ -86,6 +86,7 @@
                 </div>
 
                 {{-- Bouton moins haut --}}
+
                 <div class="pt-4">
                     <button type="submit"
                         class="w-full py-4 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold rounded-2xl shadow-lg shadow-pink-100 transform transition hover:scale-[1.02] active:scale-95 uppercase text-xs tracking-[0.2em] flex items-center justify-center space-x-2">
@@ -94,6 +95,12 @@
                     </button>
                 </div>
             </form>
+            @else
+            <div class="text-center p-10 bg-white rounded-3xl border-2 border-dashed border-pink-200">
+                <p class="text-gray-500 mb-4">Tu dois être connecté pour partager tes recettes ! 🧑‍🍳</p>
+                <a href="{{ route('login') }}" class="text-pink-500 font-bold underline">Connecte-toi ici</a>
+            </div>
+            @endauth
         </div>
     </div>
 </div>
