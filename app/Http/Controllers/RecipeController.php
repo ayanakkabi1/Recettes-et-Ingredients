@@ -40,7 +40,8 @@ class RecipeController extends Controller {
     }
     public function edit($id){
         $recipe=Recipe::findOrFail($id);
-        return view('recipes.edit', compact('recipe'));
+        $categories = Category::all();
+        return view('recipes.edit', compact('recipe','categories'));
     }
     PUBLIC FUNCTION Update(Request$request,$id){
         $validatedData = $request->validate([
@@ -49,7 +50,7 @@ class RecipeController extends Controller {
             'ingredients' => 'required|string',
             'steps' => 'required|string',
             'image' => 'required|string|max:255',
-            'category' => 'required|string|max:255',
+            'category_id' => 'required|integer|exists:categories,id',
         ]);
         $recipe=Recipe::findOrFail($id);
         $recipe->update($validatedData);
