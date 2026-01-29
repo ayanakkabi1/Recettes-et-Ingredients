@@ -3,7 +3,7 @@
 @section('content')
 <div class="max-w-2xl mx-auto py-8">
     <div class="bg-white rounded-[2.5rem] shadow-xl overflow-hidden border border-white transition-all duration-500 hover:shadow-pink-100/50">
-        
+
         <div class="bg-gradient-to-r from-pink-400 to-rose-400 p-6 text-center text-white">
             <h2 class="text-2xl font-black">Modifier : {{ $recipe->name }}</h2>
             <p class="text-xs text-pink-100 mt-1 uppercase tracking-widest italic">Édition de votre chef-d'œuvre</p>
@@ -16,30 +16,34 @@
             {{-- Nom de la recette --}}
             <div>
                 <label class="block text-[10px] font-black text-pink-400 uppercase mb-1 ml-2">Nom de la recette</label>
-                <input type="text" name="name" 
-                       value="{{ old('name', $recipe->name) }}" 
-                       class="w-full px-5 py-3 bg-pink-50/30 border-2 border-transparent rounded-2xl focus:border-pink-300 focus:bg-white outline-none shadow-inner transition-all">
+                <input type="text" name="name"
+                    value="{{ old('name', $recipe->name) }}"
+                    class="w-full px-5 py-3 bg-pink-50/30 border-2 border-transparent rounded-2xl focus:border-pink-300 focus:bg-white outline-none shadow-inner transition-all">
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                 {{-- Catégorie --}}
                 <div>
                     <label class="block text-[10px] font-black text-pink-400 uppercase mb-1 ml-2">Catégorie</label>
-                    <select name="category" class="w-full px-5 py-3 bg-pink-50/30 border-2 border-transparent rounded-2xl focus:border-pink-300 focus:bg-white outline-none transition-all">
-                        <option value="Entrée" {{ old('category', $recipe->category) == 'Entrée' ? 'selected' : '' }}>🥗 Entrée</option>
-                        <option value="Plat" {{ old('category', $recipe->category) == 'Plat' ? 'selected' : '' }}>🥘 Plat</option>
-                        <option value="Dessert" {{ old('category', $recipe->category) == 'Dessert' ? 'selected' : '' }}>🍰 Dessert</option>
-                        <option value="Marocaine" {{ old('category', $recipe->category) == 'Marocaine' ? 'selected' : '' }}>🇲🇦 Marocaine</option>
+                    <select name="category_id" class="w-full px-5 py-3 bg-pink-50/30 border-2 border-transparent rounded-2xl focus:border-pink-300 focus:bg-white outline-none transition-all">
+                        <option value="">-- Select a Category --</option>
+
+                        @foreach($categories as $category)
+                        <option value="{{ $category->id }}"
+                            {{ old('category_id', $recipe->category_id) == $category->id ? 'selected' : '' }}>
+                            {{ $category->name }}
+                        </option>
+                        @endforeach
                     </select>
                 </div>
 
                 {{-- URL de l'image --}}
                 <div>
                     <label class="block text-[10px] font-black text-pink-400 uppercase mb-1 ml-2">Lien Image (URL)</label>
-                    <input type="text" name="image" 
-                           value="{{ old('image', $recipe->image) }}" 
-                           class="w-full px-5 py-3 bg-pink-50/30 border-2 border-transparent rounded-2xl focus:border-pink-300 focus:bg-white outline-none transition-all"
-                           placeholder="https://...">
+                    <input type="text" name="image"
+                        value="{{ old('image', $recipe->image) }}"
+                        class="w-full px-5 py-3 bg-pink-50/30 border-2 border-transparent rounded-2xl focus:border-pink-300 focus:bg-white outline-none transition-all"
+                        placeholder="https://...">
                 </div>
             </div>
 
