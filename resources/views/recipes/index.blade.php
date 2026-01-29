@@ -58,7 +58,7 @@
                 <img src="{{ $recipe->image }}" alt="{{ $recipe->name }}" class="w-full h-full object-cover">
                 <div class="absolute top-4 left-4">
                     <span class="bg-pink-500 text-white px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest shadow-lg">
-                        {{ $recipe->category }}
+                        {{ $recipe->category->name ?? 'sans catégorie' }}
                     </span>
                 </div>
             </div>
