@@ -49,7 +49,7 @@
 
                             @foreach($categories as $category)
                             <option value="{{ $category->id }}">
-                                {{ $category->emoji }} {{ $category->name }}
+                                {{ $category->name }}
                             </option>
                             @endforeach
                         </select>
